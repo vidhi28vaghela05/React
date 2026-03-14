@@ -1,5 +1,5 @@
 import React from "react";
-import pikachu from "../assets/pikachu.jpg";
+// import pikachu from "../assets/pikachu.jpg";
 const Card1 = (props_c) => {
     console.log(props_c)
      return (
