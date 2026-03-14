@@ -6,11 +6,20 @@ const AddUser = () => {
     { username: "Riya sharma", email: "riyasarma@gmail.com" },
     { username: "vivan mehta", email: "vivanmehta@gmail.com" },
   ]);
-  function Add() {
-    let new_arr = [...Data];
-    new_arr.push({ username: "Ananya gupta", email: "ananiyagupta@gmail.com" });
-    setData(new_arr);
+function Add() {
+  let new_arr = [...Data];
+
+  new_arr.push({
+    username: "Ananya Gupta",
+    email: "ananyagupta@gmail.com",
+  });
+
+  if (Data[3]?.username === "Ananya Gupta") {
+    return console.log("not not");
   }
+
+  setData(new_arr);
+}
   return (
     <>
       <section className="flex flex-wrap items-center gap-6 justify-center  py-6 px-8">
