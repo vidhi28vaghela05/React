@@ -1,8 +1,11 @@
 import React from 'react'
+import ApiFetch from './Components/ApiFetch'
 
 const App = () => {
   return (
-    <div>App</div>
+    <>
+    <ApiFetch/>
+    </>
   )
 }
 
