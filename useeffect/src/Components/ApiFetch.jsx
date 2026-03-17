@@ -9,7 +9,10 @@ const ApiFetch = () => {
     })
     .then((data)=>{
         console.log(data);
-    });
+    })
+    .catch((err)=>{
+        console.error(err);
+    })
   };
 
   // method 2
