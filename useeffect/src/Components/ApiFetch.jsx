@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 const ApiFetch = () => {
 
@@ -21,7 +22,7 @@ const ApiFetch = () => {
         })
     };
 
-       // Method 2
+       // Method 2(asycs ,await, fetch)
     const Method2 = async () => {
        try{
           let response = await fetch('https://dummyjson.com/products?limit=10');
@@ -33,7 +34,18 @@ const ApiFetch = () => {
        }
     };
 
-
+//Method 3(axious )
+//npm i axios ( ============in terminal ======)
+const Method3 =async ()=>
+{
+// get ==> receive data only
+// post ==> sebd data only
+// petch ==> update data
+// delete ==> delete data
+let response = await axios.get("https://dummyjson.com/recipes?limit=10");
+console.log(response.data.recipes);
+setData3(response.data.recipes);
+};
 
 
   return (
@@ -53,15 +65,18 @@ const ApiFetch = () => {
         </section>
         <section className="bg-blue-100 w-full h-screen p-6 flex flex-col justify-center items-center gap-y-4">
             <h1 className="text-3xl font-bold">Method 2 : Async Await</h1> 
-            <div className="bg-black h-144 w-full rounded-md">{Data2.map((product ,idx )=>{
+            <div className="bg-black h-144 w-full rounded-md  flex flex-wrap items-center justify-center gap-4 overflow-auto p-4">
+              {Data2.map((product ,idx )=>{
               return(
-                <div key={idx} className="w-64 h-64 rounded-md bg-[#222] text-white p-4">
-                  <img src={product.images[0]} alt="product" className="w-full h-auto rounded-2xl"/>
+                <div key={idx} className="w-72  rounded-2xl bg-[#222] text-white p-4 relative overflow-hidden">
+                  <img src={product.images[0]} alt="product" 
+                  loading="lazy"
+                  className="w-full h-auto rounded-2xl bg-[#555]"/>
                   <div className="flex items-center justify-between">
-                    <h1>{product.title}</h1>
-                      <h1>${product.price}</h1>
+                    <h1 className="text-sm font-bold">{product.title}</h1>
+                      <h1 className=" text-nowrap bg-[#555] p-2 rounded-md ">${product.price}</h1>
                   </div>
-                  <p>{product.brand}</p>
+                  <p className="bg-orange-400 font-bold absolute py-1 px-3 top-4 rounded-tr-md rounded-br-md rounded-tl-xl left-4">{product.brand}</p>
                 </div>
               )
             })}
@@ -72,9 +87,23 @@ const ApiFetch = () => {
         </section>
         <section className="bg-green-100 w-full h-screen p-6 flex flex-col justify-center items-center gap-y-4">
             <h1 className="text-3xl font-bold">Method 3 : Axios(Async Await)</h1>
-            <div className="bg-black h-144 w-full rounded-md"></div>
-            <button className="px-4 py-2 text-center rounded-md font-bold bg-green-950 w-36 active:bg-green-100 active:text-green-950
-             active:border active:border-green-950 active:font-bold active:scale-90 text-white cursor-pointer" onClick={Method2}>Get Data 3</button>
+            <div className="bg-black h-144 w-full rounded-md flex flex-wrap 
+            items-center justify-center gap-4 p-6 overflow-auto">{Data3.map ((rec,idx) => {
+              return(
+                  <div key ={idx} className="text-white rounded-2xl bg-[#222] p-4 w-72 ">
+                    <img src={rec.image} alt="img" className="w-full rounded-md hover:rounded-full transition-all hover:rotate-360 duration-1000"
+                        />
+                        <div className="p-4 my-2 bg-[#444] rounded-md h-32">
+                          <h1 className="text-xl text-center font-bold">{rec.name}</h1>
+                          <h1 className="bg-red-600 text-center py-1 px-4 font-semibold rounded-xl my-2">{rec.rating} / 5.0</h1>
+                          </div>              
+                               </div>
+              );
+            })}</div>
+            <button className="px-4 py-2 text-center rounded-md font-bold bg-blue-950
+            w-36 active:bg-green-100 active:text-green-950
+             active:border active:border-green-950 active:font-bold active:scale-90
+              text-white cursor-pointer" onClick={Method3}>Get Data 3</button>
         </section>    
     </>
   )
